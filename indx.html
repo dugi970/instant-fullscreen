@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Mobile / responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <!-- SEO -->
+    <title>Instant Fullscreen Screen Tool — Black, White & Green Screen</title>
+
+    <meta name="description"
+          content="Instant fullscreen screen tool. Turn your screen black, white or green for OLED tests, video calls, lighting, sleep and chroma key backgrounds. Free online.">
+
+    <meta name="robots" content="index, follow, max-image-preview:large">
+
+    <meta name="theme-color" content="#121212">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://YOUR-DOMAIN.com/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Instant Fullscreen Screen Tool">
+    <meta property="og:description"
+          content="Instantly turn your screen completely black, white or green in fullscreen mode. Free online tool.">
+    <meta property="og:url" content="https://YOUR-DOMAIN.com/">
+    <meta property="og:site_name" content="Instant Fullscreen Screen Tool">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Instant Fullscreen Screen Tool">
+    <meta name="twitter:description"
+          content="Free fullscreen black, white and green screen tool.">
+
+    <!-- Performance -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Instant Fullscreen Screen Tool",
+        "url": "https://YOUR-DOMAIN.com/",
+        "description": "A free online fullscreen screen tool for displaying pure black, white or green screens.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Windows, macOS, Linux, Android, iOS",
+        "browserRequirements": "Requires a modern web browser",
+        "isAccessibleForFree": true,
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "featureList": [
+            "Fullscreen black screen",
+            "Fullscreen white screen",
+            "Fullscreen green screen",
+            "OLED screen testing",
+            "Video call lighting",
+            "Chroma key green screen"
+        ]
+    }
+    </script>
+
+    <style>
+        /* =========================================================
+           RESET
+        ========================================================= */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            background: #121212;
+            color: #ffffff;
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Helvetica,
+                Arial,
+                sans-serif;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            -webkit-tap-highlight-color: transparent;
+            transition: background-color 0.15s ease;
+        }
+
+        /* =========================================================
+           MAIN
+        ========================================================= */
+
+        .container {
+            width: min(92%, 760px);
+            text-align: center;
+            transition: opacity 0.15s ease;
+        }
+
+        h1 {
+            font-size: clamp(26px, 5vw, 42px);
+            font-weight: 700;
+            letter-spacing: -1.5px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #8d8d8d;
+            font-size: 15px;
+            margin-bottom: 30px;
+        }
+
+        /* =========================================================
+           BUTTONS
+        ========================================================= */
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        button {
+            width: 100%;
+            min-height: 72px;
+
+            border: 1px solid #333;
+            border-radius: 14px;
+
+            background: #1b1b1b;
+            color: #ffffff;
+
+            font-family: inherit;
+            font-size: 18px;
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.12s ease,
+                background-color 0.12s ease,
+                border-color 0.12s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            background: #222;
+            border-color: #555;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .black-button {
+            color: #ffffff;
+        }
+
+        .white-button {
+            background: #eeeeee;
+            color: #111111;
+            border-color: #eeeeee;
+        }
+
+        .white-button:hover {
+            background: #ffffff;
+            border-color: #ffffff;
+        }
+
+        .green-button {
+            color: #32ff68;
+        }
+
+        /* =========================================================
+           SEO TEXT
+        ========================================================= */
+
+        .seo-text {
+            margin: 28px auto 0;
+            max-width: 680px;
+
+            color: #666;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .seo-text strong {
+            color: #777;
+            font-weight: 500;
+        }
+
+        /* =========================================================
+           FULLSCREEN STATE
+        ========================================================= */
+
+        body.screen-active {
+            cursor: none !important;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        body.screen-active * {
+            cursor: none !important;
+        }
+
+        body.screen-active .container {
+            display: none;
+        }
+
+        /* =========================================================
+           MOBILE
+        ========================================================= */
+
+        @media (max-width: 600px) {
+            .container {
+                width: 90%;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .subtitle {
+                font-size: 14px;
+                margin-bottom: 24px;
+            }
+
+            button {
+                min-height: 68px;
+                font-size: 17px;
+            }
+
+            .seo-text {
+                margin-top: 22px;
+                font-size: 11px;
+            }
+        }
+
+        /* =========================================================
+           REDUCE MOTION
+        ========================================================= */
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="container" id="mainContent">
+
+        <h1>Instant Fullscreen Screen Tool</h1>
+
+        <p class="subtitle">
+            Choose a color and instantly fill your entire screen.
+        </p>
+
+        <div class="buttons">
+
+            <button
+                type="button"
+                class="black-button"
+                data-color="#000000"
+                aria-label="Turn on Black Screen">
+                ⬛ Turn on Black Screen
+            </button>
+
+            <button
+                type="button"
+                class="white-button"
+                data-color="#ffffff"
+                aria-label="Turn on White Screen">
+                ⬜ Turn on White Screen
+            </button>
+
+            <button
+                type="button"
+                class="green-button"
+                data-color="#00ff00"
+                aria-label="Turn on Green Screen">
+                🟩 Turn on Green Screen
+            </button>
+
+        </div>
+
+        <!--
+            Useful SEO content.
+            This is intentionally visible and natural rather than hidden
+            keyword stuffing.
+        -->
+        <section class="seo-text" aria-label="Screen tool information">
+            <strong>Free online fullscreen screen tools:</strong>
+            OLED screen burn-in test tool free online,
+            white screen light for video calls laptop,
+            10 hours pure black screen for sleep baby,
+            and fullscreen green screen chroma key background.
+        </section>
+
+    </main>
+
+
+    <script>
+        "use strict";
+
+        /* =========================================================
+           CONFIG
+        ========================================================= */
+
+        const AD_URL = "https://google.com";
+
+        const body = document.body;
+        const buttons = document.querySelectorAll("button");
+
+        let activeColor = null;
+
+
+        /* =========================================================
+           FULLSCREEN
+        ========================================================= */
+
+        function enterFullscreen() {
+
+            const element = document.documentElement;
+
+            try {
+
+                if (element.requestFullscreen) {
+                    return element.requestFullscreen();
+                }
+
+                if (element.webkitRequestFullscreen) {
+                    return element.webkitRequestFullscreen();
+                }
+
+                if (element.mozRequestFullScreen) {
+                    return element.mozRequestFullScreen();
+                }
+
+                if (element.msRequestFullscreen) {
+                    return element.msRequestFullscreen();
+                }
+
+            } catch (error) {
+                console.log("Fullscreen request failed:", error);
+            }
+        }
+
+
+        /* =========================================================
+           EXIT FULLSCREEN
+        ========================================================= */
+
+        function exitFullscreen() {
+
+            try {
+
+                if (document.exitFullscreen) {
+                    return document.exitFullscreen();
+                }
+
+                if (document.webkitExitFullscreen) {
+                    return document.webkitExitFullscreen();
+                }
+
+                if (document.mozCancelFullScreen) {
+                    return document.mozCancelFullScreen();
+                }
+
+                if (document.msExitFullscreen) {
+                    return document.msExitFullscreen();
+                }
+
+            } catch (error) {
+                console.log("Fullscreen exit failed:", error);
+            }
+        }
+
+
+        /* =========================================================
+           CHECK FULLSCREEN STATE
+        ========================================================= */
+
+        function isFullscreen() {
+
+            return !!(
+                document.fullscreenElement ||
+                document.webkitFullscreenElement ||
+                document.mozFullScreenElement ||
+                document.msFullscreenElement
+            );
+        }
+
+
+        /* =========================================================
+           TURN SCREEN ON
+        ========================================================= */
+
+        function activateScreen(color) {
+
+            activeColor = color;
+
+            /*
+             * Open advertisement first.
+             * Because this happens directly inside the user's click
+             * event, the browser is more likely to allow the popup.
+             */
+            try {
+                window.open(
+                    AD_URL,
+                    "_blank",
+                    "noopener,noreferrer"
+                );
+            } catch (error) {
+                console.log("Advertisement window blocked.");
+            }
+
+            /*
+             * Immediately change the screen.
+             */
+            body.style.backgroundColor = color;
+            body.classList.add("screen-active");
+
+            /*
+             * Request real browser fullscreen.
+             */
+            enterFullscreen();
+        }
+
+
+        /* =========================================================
+           BUTTON EVENTS
+        ========================================================= */
+
+        buttons.forEach(function(button) {
+
+            button.addEventListener("click", function() {
+
+                const color = button.dataset.color;
+
+                activateScreen(color);
+
+            });
+
+        });
+
+
+        /* =========================================================
+           FULLSCREEN CHANGE
+        ========================================================= */
+
+        function handleFullscreenChange() {
+
+            /*
+             * User pressed ESC or otherwise exited fullscreen.
+             */
+            if (!isFullscreen()) {
+
+                body.classList.remove("screen-active");
+
+                body.style.backgroundColor = "#121212";
+
+                activeColor = null;
+            }
+
+            /*
+             * If fullscreen was entered successfully,
+             * make sure the selected color remains active.
+             */
+            else if (activeColor) {
+
+                body.style.backgroundColor = activeColor;
+                body.classList.add("screen-active");
+            }
+        }
+
+
+        /* Standard */
+        document.addEventListener(
+            "fullscreenchange",
+            handleFullscreenChange
+        );
+
+        /* Safari / older WebKit */
+        document.addEventListener(
+            "webkitfullscreenchange",
+            handleFullscreenChange
+        );
+
+        /* Firefox */
+        document.addEventListener(
+            "mozfullscreenchange",
+            handleFullscreenChange
+        );
+
+        /* IE / old Edge */
+        document.addEventListener(
+            "MSFullscreenChange",
+            handleFullscreenChange
+        );
+
+
+        /* =========================================================
+           SAFETY RESET
+        ========================================================= */
+
+        window.addEventListener("pageshow", function() {
+
+            if (!isFullscreen()) {
+
+                body.classList.remove("screen-active");
+
+                body.style.backgroundColor = "#121212";
+
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>
