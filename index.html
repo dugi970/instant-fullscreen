@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" type="image/png" href="favicon.png">
     <meta name="google-site-verification" content="1kcZWvWJ_GuoKbByn1KqAd5CGmrGA3u3WjHXey7qUDw" />
     <meta charset="UTF-8">
 
@@ -18,14 +19,14 @@
     <meta name="theme-color" content="#121212">
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://YOUR-DOMAIN.com/">
+    <link rel="canonical" href="https://dugi970.github.io/instant-fullscreen/">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Instant Fullscreen Screen Tool">
     <meta property="og:description"
           content="Instantly turn your screen completely black, white or green in fullscreen mode. Free online tool.">
-    <meta property="og:url" content="https://YOUR-DOMAIN.com/">
+    <meta property="og:url" content="https://dugi970.github.io/instant-fullscreen/">
     <meta property="og:site_name" content="Instant Fullscreen Screen Tool">
 
     <!-- Twitter -->
@@ -43,7 +44,7 @@
         "@context": "https://schema.org",
         "@type": "WebApplication",
         "name": "Instant Fullscreen Screen Tool",
-        "url": "https://YOUR-DOMAIN.com/",
+        "url": "https://dugi970.github.io/instant-fullscreen/",
         "description": "A free online fullscreen screen tool for displaying pure black, white or green screens.",
         "applicationCategory": "UtilitiesApplication",
         "operatingSystem": "Windows, macOS, Linux, Android, iOS",
@@ -305,11 +306,6 @@
 
         </div>
 
-        <!--
-            Useful SEO content.
-            This is intentionally visible and natural rather than hidden
-            keyword stuffing.
-        -->
         <section class="seo-text" aria-label="Screen tool information">
             <strong>Free online fullscreen screen tools:</strong>
             OLED screen burn-in test tool free online,
@@ -334,6 +330,8 @@
         const buttons = document.querySelectorAll("button");
 
         let activeColor = null;
+        let lastAdTime = 0;
+        const AD_COOLDOWN = 15000; // 15 секунд затримки між показами реклами
 
 
         /* =========================================================
@@ -421,30 +419,24 @@
 
             activeColor = color;
 
-            /*
-             * Open advertisement first.
-             * Because this happens directly inside the user's click
-             * event, the browser is more likely to allow the popup.
-             */
-            try {
-                window.open(
-                    AD_URL,
-                    "_blank",
-                    "noopener,noreferrer"
-                );
-            } catch (error) {
-                console.log("Advertisement window blocked.");
+            const now = Date.now();
+
+            // Відкриваємо рекламу не частіше ніж 1 раз на 15 секунд
+            if (now - lastAdTime > AD_COOLDOWN) {
+                lastAdTime = now;
+                try {
+                    window.open(
+                        AD_URL,
+                        "_blank",
+                        "noopener,noreferrer"
+                    );
+                } catch (error) {
+                    console.log("Advertisement window blocked.");
+                }
             }
 
-            /*
-             * Immediately change the screen.
-             */
             body.style.backgroundColor = color;
             body.classList.add("screen-active");
-
-            /*
-             * Request real browser fullscreen.
-             */
             enterFullscreen();
         }
 
@@ -472,9 +464,6 @@
 
         function handleFullscreenChange() {
 
-            /*
-             * User pressed ESC or otherwise exited fullscreen.
-             */
             if (!isFullscreen()) {
 
                 body.classList.remove("screen-active");
@@ -484,10 +473,6 @@
                 activeColor = null;
             }
 
-            /*
-             * If fullscreen was entered successfully,
-             * make sure the selected color remains active.
-             */
             else if (activeColor) {
 
                 body.style.backgroundColor = activeColor;
